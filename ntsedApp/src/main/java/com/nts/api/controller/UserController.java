@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.nts.api.entity.User;
 import com.nts.api.repo.UserRepo;
 
-//@Controller
+@Controller
 public class UserController {
 	@Autowired(required = true)
 	private UserRepo repo;
@@ -31,9 +31,9 @@ public class UserController {
 		String userId = user.getUserId();
 		Optional<User> userdata = repo.findById(userId);
 		if (user.getPassword().equals(userdata.get().getPassword())) {
-			return "home";
+			return "redirect:/info";
 		} else {
-			return "error";
+			return "terror";
 		}
 	}
 
