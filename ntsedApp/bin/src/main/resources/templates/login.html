@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/login.css">
+
+<title>Login</title>
+</head>
+<body>
+	<form th:action="@{userLogin}" class="login" th:object="${user}" method="post">
+		<p>倉庫管理システム</p>
+		<div id = "inputGroupup">
+		<div>
+		<label>社員ID:</label>
+		<input type="text" id="input1"th:field="*{userId}"> 
+		</div>
+		</div>
+		<div id = "inputGroupdown">
+		<div>
+		<label>パスワード:</label>
+		<input type="password" id="input2"th:field="*{password}"> 
+		</div>
+		</div>
+		<input type="submit" class="btn" value="ログイン"> 
+		<input type="submit" class="btn" value="閉じる">
+	</form>
+</body>
+</html>
