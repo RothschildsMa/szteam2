@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+<script src="/js/urlManager.js"></script>
+<title>在庫情報一覧</title>
+<style>
+body {
+	background-color: #98fb98;
+	font-family: Arial, sans-serif;
+}
+
+h1 {
+	text-align: center;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid #ccc;
+	padding: 8px;
+	text-align: center;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+.button-container {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.button-container button {
+	padding: 10px 20px;
+	font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+	<div>
+
+		<h4>在庫情報一覧</h4>
+		<form id="selectForm" th:object="${searchForm}">
+			<div style="display: flex; align-items: center;">
+				<label for="id"
+					style="display: inline-block; width: 50px; font-size: 0.6rem; margin-right: 20px; text-align: right;">在庫名称：</label>
+				<input type="text" name="id" id="id" th:field="*{name}"
+					style="display: inline-block; width: calc(30% - 10px); font-size: 0.1rem; padding: 0.1rem; margin-bottom: 0.1rem; border-width: 0.1px;">
+				<label for="group"
+					style="display: inline-block; width: 60px; font-size: 0.6rem; margin-left: 20px; margin-right: 10px; text-align: right;">単位：</label>
+				<select th:field="*{unitId}" id="group"
+					style="display: inline-block; width: calc(20% - 100px); font-size: 0.5rem; padding: 0.3rem; margin-bottom: 0.5rem;">
+					<option value="000">選択してください</option>
+					<option value="001">個</option>
+					<option value="002">冊</option>
+					<option value="003">箱</option>
+					<option value="004">台</option>
+					<option value="005">本</option>
+				</select>
+
+			</div>
+
+
+
+
+			<div
+				style="display: flex; align-items: center; justify-content: flex-end;">
+				<label for="update_date" style="font-size: 0.9rem;">更新日時：</label> <input
+					th:field="*{startDate}" type="date" name="update_date"
+					id="update_date"
+					style="font-size: 0.9rem; padding: 0.2rem; border: 1px solid #ccc;">～
+				<input th:field="*{endDate}" type="date" name="update_date"
+					id="update_date"
+					style="font-size: 0.9rem; padding: 0.2rem; border: 1px solid #ccc;">
+				<div style="margin-left: auto;">
+					<button class="serch" type="submit"
+						onclick="submitForm('selectForm','home','post')">検索</button>
+					<button type="submit" onclick="submitForm('selectForm','logout')">閉じる</button>
+				</div>
+			</div>
+
+			<div>
+				<button type="submit" onclick="submitForm('selectForm','add','get')">追加</button>
+				
+			</div>
+			<hr>
+
+			<table>
+				<thead>
+					<tr>
+						
+						<th>在庫ID</th>
+						<th>在庫名称</th>
+						<th>単位</th>
+						<th>在庫数量</th>
+						<th>更新者</th>
+						<th>更新日時</th>
+						<th>備考</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- ここに在庫情報のデータを表示するためのループ処理を追加 -->
+
+					<tr th:each="stock,status : ${stockList}" th:object="${stock}">
+						
+						<td th:text="*{stockId}"></td>
+						<td th:text="*{name}"></td>
+						<td th:text="*{unitName}"></td>
+						<td th:text="*{stockNum}"></td>
+						<td th:text="*{updateUser}"></td>
+						<td th:text="${#dates.format(stock.updateDate, 'yyyy/MM/dd')}"></td>
+						<td th:text="*{remarks}"></td>
+						<td><a th:href="@{/zaiko/{id}/update(id=*{stockId})}"
+							class="btn btn-primary">編集</a> <a
+							th:href="@{/zaiko/{id}/input(id=*{stockId})}"
+							class="btn btn-secondary">削除</a></td>
+
+					</tr>
+				</tbody>
+			</table>
+
+		</form>
+</body>
+
+</html>

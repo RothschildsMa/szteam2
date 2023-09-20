@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.nts.api.entity.User;
 import com.nts.api.repo.UserRepo;
 
-@Controller
+//@Controller
 public class UserController {
 	@Autowired(required = true)
 	private UserRepo repo;
