@@ -67,11 +67,7 @@
 			<artifactId>SSM_Project</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>SpringSample1</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+
 	</dependencies>
 
 	<build>

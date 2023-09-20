@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nts.api.dao.UpdateMapper">
+
+	<!--在庫情報追加 -->
+	<insert id="insert">
+		INSERT INTO t_stock (stock_id, name, unit_id, remarks,create_user)
+		VALUES (#{stockId},#{name},#{unitId},#{remarks},#{createUser});
+	</insert>
+
+	
+
+	<select id="getMaxId" resultType="java.lang.String">
+		SELECT MAX(stock_id) FROM t_stock;
+	</select>
+	
+	<select id="getStockById" resultType="com.nts.api.entity.Stock">
+		SELECT * FROM t_stock WHERE stock_id=#{id} AND del_flg=0;
+	</select>
+	
+
+
+
+
+<update id="update">
+	update t_stock
+	set name = #{name},
+	unit_id = #{unitId},
+	remarks = #{remarks}
+	where stock_id = #{stockId}
+</update>
+
+
+
+
+
+</mapper>
