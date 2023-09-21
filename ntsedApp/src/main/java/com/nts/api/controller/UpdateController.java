@@ -46,6 +46,7 @@ public class UpdateController {
 
 	}
 
+	
 	@GetMapping("/{id}/update")
 	public String view3(@PathVariable String id, Model model, AddForm addForm) {
 
